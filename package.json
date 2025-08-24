@@ -1,0 +1,28 @@
+{
+  "name": "seeds-of-hope-website",
+  "version": "1.0.0",
+  "description": "Seeds of Hope Queensburgh website with PayFast integration",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build required'",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "crypto": "^1.0.1"
+  },
+  "devDependencies": {
+    "@vercel/node": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "charity",
+    "donations",
+    "payfast",
+    "vercel"
+  ],
+  "author": "Seeds of Hope Queensburgh",
+  "license": "MIT"
+}

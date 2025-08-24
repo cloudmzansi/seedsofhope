@@ -49,7 +49,12 @@ function generatePayFastSignature(data, passphrase) {
         // Add all non-empty parameters in alphabetical order (excluding signature)
         Object.keys(data).sort().forEach(key => {
             if (data[key] !== '' && data[key] !== null && data[key] !== undefined && key !== 'signature') {
-                signatureParams.push(`${key}=${encodeURIComponent(data[key]).replace(/%20/g, '+')}`);
+                // PayFast expects values to be URL encoded but with + instead of %20 for spaces
+                let value = data[key].toString().trim();
+                if (value !== '') {
+                    value = encodeURIComponent(value).replace(/%20/g, '+');
+                    signatureParams.push(`${key}=${value}`);
+                }
             }
         });
         

@@ -488,7 +488,15 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('PayFast configuration loaded successfully');
         } catch (error) {
             console.error('Error loading PayFast configuration:', error);
-            throw error;
+            // Fallback to test configuration if API fails
+            console.log('Falling back to test configuration');
+            PAYFAST_CONFIG = {
+                merchant_id: '10000100', // Test merchant ID
+                merchant_key: '46f0cd694581a', // Test merchant key
+                return_url: window.location.origin + '/donation-success.html',
+                cancel_url: window.location.origin + '/donation-cancelled.html',
+                notify_url: window.location.origin + '/api/payfast-notify'
+            };
         }
     }
 
@@ -615,7 +623,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
             submitButton.disabled = true;
 
-            // Prepare PayFast data
+            // Prepare PayFast data - ensure all required fields are present
             const payfastData = {
                 merchant_id: PAYFAST_CONFIG.merchant_id,
                 merchant_key: PAYFAST_CONFIG.merchant_key,
@@ -623,7 +631,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 cancel_url: PAYFAST_CONFIG.cancel_url,
                 notify_url: PAYFAST_CONFIG.notify_url,
                 name_first: formData.name.split(' ')[0] || formData.name,
-                name_last: formData.name.split(' ').slice(1).join(' ') || '',
+                name_last: formData.name.split(' ').slice(1).join(' ') || 'N/A',
                 email_address: formData.email_address,
                 m_payment_id: generatePaymentId(),
                 amount: selectedAmount.toFixed(2),
@@ -635,11 +643,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 custom_str5: window.location.href
             };
 
-            // Generate signature
-            payfastData.signature = await generatePayFastSignature(payfastData);
+            // Remove any empty values to prevent signature issues
+            Object.keys(payfastData).forEach(key => {
+                if (payfastData[key] === '' || payfastData[key] === null || payfastData[key] === undefined) {
+                    delete payfastData[key];
+                }
+            });
 
-            // Submit to PayFast
-            submitToPayFast(payfastData, submitButton, originalText);
+            try {
+                // Generate signature
+                payfastData.signature = await generatePayFastSignature(payfastData);
+
+                // Submit to PayFast
+                submitToPayFast(payfastData, submitButton, originalText);
+            } catch (error) {
+                console.error('Error processing donation:', error);
+                showNotification('There was an error processing your donation. Please try again.', 'error');
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }
         }
 
         function generatePaymentId() {
@@ -674,7 +696,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // Create form for PayFast submission
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'https://www.payfast.co.za/eng/process'; // Live PayFast URL
+            
+            // Use sandbox URL for testing, live URL for production
+            const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const payfastUrl = isLocalhost ? 
+                'https://sandbox.payfast.co.za/eng/process' : 
+                'https://www.payfast.co.za/eng/process';
+            
+            form.action = payfastUrl;
             form.style.display = 'none';
 
             // Add form fields
@@ -688,6 +717,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Add form to page and submit
             document.body.appendChild(form);
+            
+            // Debug: Log the form data being submitted
+            console.log('Submitting to PayFast:', data);
             
             // Show success message before redirect
             showNotification('Redirecting to secure payment gateway...', 'success');

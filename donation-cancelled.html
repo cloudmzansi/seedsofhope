@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Cancelled - Seeds of Hope Queensburgh</title>
+    <meta name="description" content="Your donation was cancelled. We'd still love your support for Seeds of Hope Queensburgh.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .cancelled-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--navy-blue) 0%, #011a47 100%);
+            padding: 2rem;
+        }
+        
+        .cancelled-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.6s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .cancelled-icon {
+            width: 100px;
+            height: 100px;
+            background: #FF9800;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+        }
+        
+        .cancelled-icon i {
+            font-size: 3rem;
+            color: var(--white);
+        }
+        
+        .cancelled-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--navy-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .cancelled-message {
+            font-family: 'Merriweather', serif;
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .reassurance-box {
+            background: var(--light-gray);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--golden-yellow);
+        }
+        
+        .reassurance-box h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--navy-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .reassurance-box p {
+            font-family: 'Merriweather', serif;
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-home {
+            background: var(--navy-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-home:hover {
+            background: #011a47;
+            transform: translateY(-2px);
+        }
+        
+        .btn-try-again {
+            background: var(--golden-yellow);
+            color: var(--navy-blue);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-try-again:hover {
+            background: #e6c200;
+            transform: translateY(-2px);
+        }
+        
+        .contact-info {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-gray);
+        }
+        
+        .contact-info h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--navy-blue);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .contact-info p {
+            font-family: 'Merriweather', serif;
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-info a {
+            color: var(--golden-yellow);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .cancelled-card {
+                padding: 2rem;
+            }
+            
+            .cancelled-title {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cancelled-container">
+        <div class="cancelled-card">
+            <div class="cancelled-icon">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            
+            <h1 class="cancelled-title">Donation Cancelled</h1>
+            
+            <p class="cancelled-message">
+                Your donation was not completed. No charges have been made to your account. 
+                We understand that sometimes things come up, and we're here to help if you 
+                have any questions about making a donation.
+            </p>
+            
+            <div class="reassurance-box">
+                <h3>No Worries!</h3>
+                <p>
+                    Your donation was cancelled before any payment was processed. Your financial 
+                    information is secure, and no charges will appear on your account. You can 
+                    try again anytime, or contact us if you need assistance.
+                </p>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="index.html" class="btn-home">
+                    <i class="fas fa-home"></i> Return Home
+                </a>
+                <a href="index.html#donate" class="btn-try-again">
+                    <i class="fas fa-heart"></i> Try Again
+                </a>
+            </div>
+            
+            <div class="contact-info">
+                <h4>Need Help?</h4>
+                <p>If you experienced any issues or have questions, please contact us:</p>
+                <p>Email: <a href="mailto:info@seedsofhopequeensburgh.org.za">info@seedsofhopequeensburgh.org.za</a></p>
+                <p>Phone: <a href="tel:+27311234567">+27 31 123 4567</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-redirect after 60 seconds
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 60000);
+        
+        // Track cancellation for analytics (if needed)
+        console.log('Donation cancelled at:', new Date().toISOString());
+    </script>
+</body>
+</html>

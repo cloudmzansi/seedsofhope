@@ -460,6 +460,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function loadPayFastConfig() {
         try {
+            // Check if we're in development mode (localhost)
+            const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            
+            if (isLocalhost) {
+                // For local development, use a mock configuration
+                console.log('Running in development mode - using mock PayFast configuration');
+                PAYFAST_CONFIG = {
+                    merchant_id: '10000100', // Test merchant ID
+                    merchant_key: '46f0cd694581a', // Test merchant key
+                    return_url: window.location.origin + '/donation-success.html',
+                    cancel_url: window.location.origin + '/donation-cancelled.html',
+                    notify_url: window.location.origin + '/api/payfast-notify'
+                };
+                console.log('Mock PayFast configuration loaded for development');
+                return;
+            }
+            
+            // For production, load from API
             const response = await fetch('/api/payfast-config');
             
             if (!response.ok) {
